@@ -40,8 +40,6 @@ pipeline {
          stage('Docker Login'){
             
             steps {
-                 withCredentials([string(credentialsId: 'DockerId', variable: 'Dockerpwd')]) {
-                     sh "sudo usermod -aG docker $USER"
                     sh "docker login -u syedraza517 -p Irtaza_99"
                 }
             }                
