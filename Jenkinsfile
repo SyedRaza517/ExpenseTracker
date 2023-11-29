@@ -1,7 +1,7 @@
 pipeline {
     agent any
      tools {
-        maven "3.8.5"
+        maven "3.8.4"
     }
     stages {
         stage('build') {
@@ -16,6 +16,13 @@ pipeline {
                 sh "mvn clean compile"
             }
     }
+        stage('Test') { 
+            steps {
+                // Run Maven on a Unix agent.
+              
+                sh "mvn test"
+            }
+    }
          stage('deploy') { 
             
             steps {
@@ -27,27 +34,28 @@ pipeline {
             steps {
                 echo "Welcome to Expense Tracker"
                 sh 'ls'
-                sh 'docker build -t  raza/expense-tracker:${BUILD_NUMBER} .'
+                sh 'docker build -t  syedraza517/expense-tracker:${BUILD_NUMBER} .'
             }
         }
          stage('Docker Login'){
             
             steps {
                  withCredentials([string(credentialsId: 'DockerId', variable: 'Dockerpwd')]) {
-                    sh "docker login -u anvbhaskar -p ${Dockerpwd}"
+                     sh "sudo usermod -aG docker $USER"
+                    sh "docker login -u syedraza517 -p Irtaza_99"
                 }
             }                
         }
 
           stage('Docker Push'){
             steps {
-                sh 'docker push anvbhaskar/docker_jenkins_springboot:${BUILD_NUMBER}'
+                sh 'docker push syedraza517/expense-tracker:${BUILD_NUMBER}'
             }
         }
         stage('Docker deploy'){
             steps {
                
-                sh 'docker run -itd -p  8081:8080 anvbhaskar/docker_jenkins_springboot:${BUILD_NUMBER}'
+                sh 'docker run -itd -p  8081:8080 syedraza517/expense-tracker:${BUILD_NUMBER}'
             }
         }
         stage('Archving') { 
