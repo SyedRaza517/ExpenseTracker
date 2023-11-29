@@ -43,8 +43,6 @@ pipeline {
                     sh "docker login -u syedraza517 -p Irtaza_99"
                 }
             }                
-        }
-
           stage('Docker Push'){
             steps {
                 sh 'docker push syedraza517/expense-tracker:${BUILD_NUMBER}'
@@ -62,6 +60,8 @@ pipeline {
             }
         }
     }
+}
+
 
         
 
