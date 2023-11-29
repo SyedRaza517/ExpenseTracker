@@ -22,7 +22,7 @@ pipeline {
               
         //         sh "mvn test"
         //     }
-    }
+  //  }
          stage('deploy') { 
             
             steps {
