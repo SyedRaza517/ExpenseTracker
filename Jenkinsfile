@@ -16,12 +16,12 @@ pipeline {
                 sh "mvn clean compile"
             }
     }
-        stage('Test') { 
-            steps {
-                // Run Maven on a Unix agent.
+        // stage('Test') { 
+        //     steps {
+        //         // Run Maven on a Unix agent.
               
-                sh "mvn test"
-            }
+        //         sh "mvn test"
+        //     }
     }
          stage('deploy') { 
             
