@@ -2,16 +2,14 @@ package com.expensetracker.ExpenseTracker.controller;
 
 import com.expensetracker.ExpenseTracker.Entities.Records;
 import com.expensetracker.ExpenseTracker.Entities.Registration;
+import com.expensetracker.ExpenseTracker.repositories.RecordRepository;
 import com.expensetracker.ExpenseTracker.service.LoginService;
 import com.expensetracker.ExpenseTracker.service.RecordService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.ArrayList;
@@ -28,6 +26,8 @@ public class RecordsController {
 
     @Autowired
     private LoginService loginService;
+
+    private RecordRepository recordRepository;
 
 
     @PostMapping("/addRecord")
@@ -96,6 +96,12 @@ public class RecordsController {
         List<Records> list = loginService.getAllRecords();
         System.out.println(list);
         return new ModelAndView("records.html","records",list);
+    }
+
+    @GetMapping(value = "/getAllrecords")
+    public List<Records> getAllRecords(){
+
+        return recordRepository.findAll();
     }
 
 
