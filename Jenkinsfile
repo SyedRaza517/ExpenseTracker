@@ -40,7 +40,7 @@ pipeline {
          stage('Docker Login'){
             
             steps {
-                    sh "docker login -u syedmuhammadr517@gmail.com -p Irtaza_99"
+                    sh "docker login -u syedraza517 -p docker123"
                 }
             }                
           stage('Docker Push'){
