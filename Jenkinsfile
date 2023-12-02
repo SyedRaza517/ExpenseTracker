@@ -34,7 +34,7 @@ pipeline {
             steps {
                 echo "Welcome to Expense Tracker"
                 sh 'ls'
-                sh 'docker build -t  expense-tracker-final:${BUILD_NUMBER} .'
+                sh 'docker build -t  expense-tracker-last:${BUILD_NUMBER} .'
             }
         }
          stage('Docker Login'){
@@ -45,13 +45,13 @@ pipeline {
             }                
           stage('Docker Push'){
             steps {
-                sh 'docker push expense-tracker-final:${BUILD_NUMBER}'
+                sh 'docker push expense-tracker-last:${BUILD_NUMBER}'
             }
         }
         stage('Docker deploy'){
             steps {
                
-                sh 'docker run -itd -p  80:80 expense-tracker-final:${BUILD_NUMBER}'
+                sh 'docker run -itd -p  80:80 expense-tracker-last:${BUILD_NUMBER}'
             }
         }
         stage('Archving') { 
