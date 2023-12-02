@@ -51,7 +51,7 @@ pipeline {
         stage('Docker deploy'){
             steps {
                
-                sh 'docker run -itd -p  8081:8080 syedraza517/expense-tracker:${BUILD_NUMBER}'
+                sh 'docker run -itd -p  80:80 syedraza517/expense-tracker:${BUILD_NUMBER}'
             }
         }
         stage('Archving') { 
