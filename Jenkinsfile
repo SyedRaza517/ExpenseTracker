@@ -34,24 +34,24 @@ pipeline {
             steps {
                 echo "Welcome to Expense Tracker"
                 sh 'ls'
-                sh 'docker build -t  syedraza517/expense-tracker:${BUILD_NUMBER} .'
+                sh 'docker build -t  syedraza517/expense-tracker-last:${BUILD_NUMBER} .'
             }
         }
          stage('Docker Login'){
             
             steps {
-                    sh "docker login -u syedraza517 -p Irtaza_99"
+                    sh "docker login -u syedraza517 -p docker123"
                 }
             }                
           stage('Docker Push'){
             steps {
-                sh 'docker push syedraza517/expense-tracker:${BUILD_NUMBER}'
+                sh 'docker push syedraza517/expense-tracker-last:${BUILD_NUMBER}'
             }
         }
         stage('Docker deploy'){
             steps {
                
-                sh 'docker run -itd -p  8081:8080 syedraza517/expense-tracker:${BUILD_NUMBER}'
+                sh 'docker run -itd -p  8081:80 syedraza517/expense-tracker-last:${BUILD_NUMBER}'
             }
         }
         stage('Archving') { 
